@@ -1,8 +1,17 @@
+import SearchBar from '../SearchBar/SearchBar';
 import './App.module.css'
 
+// const myToken = import.meta.env.VITE_API_TOKEN;
+
+
 function App() {
+  const handleSearch = (searchValue: string) => {
+  console.log(searchValue);
+  
+  };
+
     return (
-      <h1>Start</h1>
+      <SearchBar onSearch={handleSearch}/>
     )
 };
 
