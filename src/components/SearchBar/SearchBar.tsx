@@ -10,8 +10,10 @@ const SearchBar = ({onSearch}: Props) => {
 
     const handleSubmit = (formData: FormData) => {
       const searchValue = formData.get("query") as string;
-      if (searchValue === "") {
-        toast('Please enter your search query.');
+
+      if (!searchValue.trim()) {
+        toast.error("Please enter your search query.");
+        return;
       } else {
         onSearch(searchValue);
       }

@@ -3,39 +3,33 @@ import type { Movie } from "../types/movie";
 
 const myToken = import.meta.env.VITE_API_TOKEN;
 
-// interface SearchMovieParams {
-//     query: string,
-//     include_adult?: boolean,
-//     language?: string,
-//     page?: number,
-// }
-
 
 interface SearchMovieResponse {
-    hits: Movie[],
-    nbPage?: number
+    results: Movie[],
+    page?: number
 }
 
-async function fetchMovies(searchValue: string) {
+async function fetchMovies(searchValue: string): Promise<Movie[]> {
     try {
-        const res = await axios.get<SearchMovieResponse>("https://api.themoviedb.org/3/search/movie/popular"
-       , {
+        const res = await axios.get<SearchMovieResponse>(
+            "https://api.themoviedb.org/3/search/movie", {
             params: {
                query: searchValue,
-            //    include_adult: false,
-            //    language: "en-US",
-            //    page: 1,
+               include_adult: false,
+               language: "en-US",
+               page: 1,
 
             },
             headers: {
                 Authorization: `Bearer ${myToken}`,
             }
-        });
-        // console.log(res.data.hits);
-        return res.data.hits;
+        }
+    );
+        return res.data.results;
         
 } catch (error) {
-        console.error(error);       
+        console.error(error);
+        return [];
 }
 }
 
