@@ -1,17 +1,24 @@
+import { useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import './App.module.css'
-
-// const myToken = import.meta.env.VITE_API_TOKEN;
+import type { Movie } from '../../types/movie';
+import fetchMovies from '../../services/movieService';
+// import MovieGrid from '../MovieGrid/MovieGrid';
+  
 
 
 function App() {
-  const handleSearch = (searchValue: string) => {
-  console.log(searchValue);
+  const [, setMovies] = useState<Movie[]>([]);
   
+  const handleSearch = async (searchValue: string) => {
+    // console.log(searchValue);
+    const newMovie = await fetchMovies(searchValue) as Movie[] ;
+    setMovies(newMovie);
   };
 
     return (
-      <SearchBar onSearch={handleSearch}/>
+      <SearchBar onSearch={handleSearch} />
+      // <MovieGrid />
     )
 };
 

@@ -1,4 +1,5 @@
 import styles from "./SearchBar.module.css";
+import toast from "react-hot-toast";
 
 
 interface Props {
@@ -8,8 +9,13 @@ interface Props {
 const SearchBar = ({onSearch}: Props) => {
 
     const handleSubmit = (formData: FormData) => {
-        const searchValue = formData.get("query") as string;
+      const searchValue = formData.get("query") as string;
+      if (searchValue === "") {
+        toast('Please enter your search query.');
+      } else {
         onSearch(searchValue);
+      }
+        
     }
 
 
