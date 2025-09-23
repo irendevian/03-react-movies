@@ -10,7 +10,7 @@ interface SearchMovieResponse {
 }
 
 async function fetchMovies(searchValue: string): Promise<Movie[]> {
-    try {
+    try {   
         const res = await axios.get<SearchMovieResponse>(
             "https://api.themoviedb.org/3/search/movie", {
             params: {
@@ -20,7 +20,7 @@ async function fetchMovies(searchValue: string): Promise<Movie[]> {
                page: 1,
 
             },
-            headers: {
+                headers: {
                 Authorization: `Bearer ${myToken}`,
             }
         }

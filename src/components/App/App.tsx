@@ -38,7 +38,7 @@ function App() {
           // <MovieGrid movies={movies} />
           <ul>
               {movies.map (movie => (
-                <li>{movie.title}</li>
+                <li key={movie.id}>{movie.title}</li>
               ))}
           </ul>
       ) : null}
