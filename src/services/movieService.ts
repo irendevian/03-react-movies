@@ -24,7 +24,9 @@ async function fetchMovies(searchValue: string): Promise<Movie[]> {
                 Authorization: `Bearer ${myToken}`,
             }
         }
-    );
+        );
+
+        console.log(res.data.results);
         return res.data.results;
         
 } catch (error) {

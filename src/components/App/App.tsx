@@ -4,7 +4,7 @@ import './App.module.css'
 import type { Movie } from '../../types/movie';
 import fetchMovies from '../../services/movieService';
 import toast, { Toaster } from 'react-hot-toast';
-// import MovieGrid from '../MovieGrid/MovieGrid';
+import MovieGrid from '../MovieGrid/MovieGrid';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
   
 
@@ -35,12 +35,7 @@ function App() {
       <SearchBar onSearch={handleSearch} />
       {error ? (
         <ErrorMessage />) : movies.length > 0 ? (
-          // <MovieGrid movies={movies} />
-          <ul>
-              {movies.map (movie => (
-                <li key={movie.id}>{movie.title}</li>
-              ))}
-          </ul>
+          <MovieGrid movies={movies} />
       ) : null}
       <Toaster position='top-center' />
           </>
