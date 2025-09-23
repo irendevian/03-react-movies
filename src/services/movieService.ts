@@ -31,7 +31,7 @@ async function fetchMovies(searchValue: string): Promise<Movie[]> {
         
 } catch (error) {
         console.error(error);
-        return [];
+        throw new Error;
 }
 }
 

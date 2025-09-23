@@ -22,7 +22,7 @@ function App() {
       setMovies([]);
       const newMovie = await fetchMovies(searchValue);
 
-      if (!newMovie || newMovie.length === 0) {
+      if (newMovie.length === 0) {
         toast.error("No movies found for your request.");
       }
       setMovies(newMovie);
@@ -39,10 +39,8 @@ function App() {
     <>
       <SearchBar onSearch={handleSearch} />
       {isLoading && <Loader /> }
-      {error ? (
-        <ErrorMessage />) : movies.length > 0 ? (
-          <MovieGrid movies={movies} />
-      ) : null}
+      {error && <ErrorMessage /> }
+      {movies.length > 0 ? <MovieGrid movies={movies} /> : null}
       <Toaster position='top-center' />
           </>
   );
