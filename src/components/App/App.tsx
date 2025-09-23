@@ -6,16 +6,20 @@ import fetchMovies from '../../services/movieService';
 import toast, { Toaster } from 'react-hot-toast';
 import MovieGrid from '../MovieGrid/MovieGrid';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import Loader from '../Loader/Loader';
   
 
 
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   
   const handleSearch = async (searchValue: string) => {
     try {
       setError(false);
+      setIsLoading(true);
+      setMovies([]);
       const newMovie = await fetchMovies(searchValue);
 
       if (!newMovie || newMovie.length === 0) {
@@ -25,7 +29,8 @@ function App() {
     } catch (error) {
       console.error(error);
       setError(true);
-      
+    } finally {
+      setIsLoading(false);
     }
     
   };
@@ -33,6 +38,7 @@ function App() {
   return (
     <>
       <SearchBar onSearch={handleSearch} />
+      {isLoading && <Loader /> }
       {error ? (
         <ErrorMessage />) : movies.length > 0 ? (
           <MovieGrid movies={movies} />
