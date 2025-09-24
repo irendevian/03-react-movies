@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import MovieGrid from '../MovieGrid/MovieGrid';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Loader from '../Loader/Loader';
+import MovieModal from '../MovieModal/MovieModal';
   
 
 
@@ -14,6 +15,7 @@ function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState<Movie|null>(null);
   
   const handleSearch = async (searchValue: string) => {
     try {
@@ -32,15 +34,17 @@ function App() {
     } finally {
       setIsLoading(false);
     }
-    
   };
+
+  const closeModal = () => setSelectedMovie(null);
 
   return (
     <>
       <SearchBar onSearch={handleSearch} />
       {isLoading && <Loader /> }
       {error && <ErrorMessage /> }
-      {movies.length > 0 ? <MovieGrid movies={movies} /> : null}
+      {movies.length > 0 ? <MovieGrid movies={movies} onSelect={(movie) => setSelectedMovie(movie)}/> : null}
+      {selectedMovie && <MovieModal movie={selectedMovie} onClose={closeModal}/>}
       <Toaster position='top-center' />
           </>
   );
