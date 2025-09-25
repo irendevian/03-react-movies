@@ -4,12 +4,12 @@ import css from "./MovieModal.module.css"
 import { useEffect } from "react";
 
 
-interface ModalProps {
+interface MovieModalProps {
     movie: Movie;
     onClose: () => void;
 }
 
-const MovieModal = ({ movie, onClose }: ModalProps) => {
+const MovieModal = ({ movie, onClose }: MovieModalProps) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
@@ -39,7 +39,7 @@ const MovieModal = ({ movie, onClose }: ModalProps) => {
           &times;
         </button>
         <img
-          src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={movie.title}
           className={css.image}
         />

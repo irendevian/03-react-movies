@@ -40,7 +40,7 @@ function App() {
 
   return (
     <>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSubmit={handleSearch} />
       {isLoading && <Loader /> }
       {error && <ErrorMessage /> }
       {movies.length > 0 ? <MovieGrid movies={movies} onSelect={(movie) => setSelectedMovie(movie)}/> : null}
